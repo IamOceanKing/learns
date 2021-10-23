@@ -1,0 +1,49 @@
+spring:
+    http:
+        encoding:
+            charset: UTF-8
+            enabled: true
+            force: true
+    application:
+        name: ${serviceName}
+        admin:
+          enabled: true
+    profiles:
+        active: dev
+    thymeleaf:
+        cache: false
+    jackson:
+        date-format: yyyy-MM-dd HH:mm:ss
+        time-zone: GMT+8
+    redis:
+        database: ${redis.database}
+        host: ${redis.host}
+        port: ${redis.port}
+        password: ${redis.password}
+        lettuce:
+            pool:
+                max-idle: ${redis.maxIdle}
+                min-idle: ${redis.minIdle}
+                max-active: ${redis.maxActive}
+    servlet:
+      multipart:
+        max-request-size: 100
+        max-file-size: 10
+    devtools:
+        restart:
+            enabled: true  #设置开启热部署
+            additional-paths: src/main/java #重启目录
+            exclude: WEB-INF/**
+
+server:
+    port: ${server.port}
+    tomcat:
+        accesslog:
+            enabled: true
+            pattern: "%{X-Forwarded-For}i %h %{yyyy-MM-dd HH:mm:ss}t \"%r\" %s %b %D"
+            directory: /data/log/oceanking/access
+        max-threads: 500
+        max-connections: 1000
+        uri-encoding: utf-8
+        max-http-post-size: -1
+        max-http-header-size: -1
